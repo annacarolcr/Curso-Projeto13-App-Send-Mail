@@ -57,7 +57,7 @@
 
         //Recipients
         $mail->setFrom('curso202120212021@gmail.com', 'Remetente');
-        $mail->addAddress('curso202120212021@gmail.com', 'Destinatário');     //Add a recipient
+        $mail->addAddress($mensagem->__get('para'));     //Add a recipient
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
@@ -68,12 +68,12 @@
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Assunto do E-mail';
-        $mail->Body    = 'Corpo do <strong>e-mail</strong>';
-        $mail->AltBody = 'Corpo do e-mail';
+        $mail->Subject = $mensagem->__get('assunto');
+        $mail->Body    = $mensagem->__get('mensagem');
+        $mail->AltBody = 'É necessário utilizar um client que suporte HTML para ter acesso total ao conteúdo desta mensagem.';
 
         $mail->send();
-        echo 'Mensagem foi enviada.';
+        echo 'E-mail enviado com sucesso';
     } catch (Exception $e) {
         echo "Não foi possível enviar este e-mail. Por favor, tente novamente mais tarde. Detalhes do erro: {$mail->ErrorInfo}";
     }
